@@ -5,52 +5,36 @@ Handles the core game loop
 
 :author: Cameron O'Brien
 """
-import pygame
-import random
-import math
-width, height = 1280, 720
+import pygame, random
+from character import Character
+width, height = 640, 480
 background_color = (255, 255, 255)
+bg = pygame.image.load("background_image.png")
 
 
 class Game:
     screen = pygame.display.set_mode((width, height))
+    all_sprites_list = pygame.sprite.Group()
+
+    sprite = Character("warrior", 24, 24)
+    sprite.rect.x = 200
+    sprite.rect.y = 300
+
+    # Add the sprite we have made to the list of sprites
+    all_sprites_list.add(sprite)
 
     def __init__(self):
         pygame.display.set_caption('Cameron\'s Practice Game')
-        Game.screen.fill(background_color)
-        particle = Game.Particle(150, 50, 15)
-        particle.display()
-        for x in range(10):
-            self.create_particle()
-        pygame.display.flip()
+        clock = pygame.time.Clock()
         running = True
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
-
-    def create_particle(self):
-        c = Game.Particle(int(random.uniform(0, 1200)), int(random.uniform(0, 700)), 15)
-        c.display()
-        c.move()
-
-
-    class Particle:
-        def __init__(self, x, y, size):
-            self.x = x
-            self.y = y
-            self.size = size
-            self.color = (0, 0, 255)
-            self.thickness = 1
-            self.speed = 0.05
-            self.angle = 5
-
-        def display(self):
-            pygame.draw.circle(Game.screen, self.color, (self.x, self.y), self.size, self.thickness)
-
-        def move(self):
-            self.x += math.sin(self.angle) * self.speed
-            self.y -= math.cos(self.angle) * self.speed
-            self.angle = math.pi/2
+            Game.screen.blit(bg, (0, 0))
+            Game.all_sprites_list.update()  # Game Logic
+            Game.all_sprites_list.draw(Game.screen)  # Draw sprites
+            pygame.display.flip()  # Refresh screen
+            clock.tick(60)  # Number of frames per second
 
 g = Game()
