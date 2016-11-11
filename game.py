@@ -36,17 +36,18 @@ class Game:
             self.handles_keys(0)
             pygame.display.flip()  # Refresh screen
             clock.tick(60)  # Number of frames per second
+
     def handles_keys(self, index):
-        sprite = list(self.all_sprites_list)[0]
-        key  = pygame.key.get_pressed()
+        index = list(self.all_sprites_list)[0]
+        key = pygame.key.get_pressed()
         if key[pygame.K_DOWN]:  # down key
-            sscreen.blit(sprite.rect.x, (sprite.rect.y -5))  # move down
+            self.screen.blit(sprite.rect.x, (sprite.rect.y -5))  # move down
         elif key[pygame.K_UP]:  # up key
-            screen.blit(sprite.rect.x, (sprite.rect.y +5))  # move up
+            self.screen.blit(sprite.rect.x, (sprite.rect.y +5))  # move up
         if key[pygame.K_RIGHT]:  # right key
-            screen.blit(sprite.rect.x+5, sprite.rect.y + 5)  # move right
+            self.screen.blit(sprite.rect.x+5, sprite.rect.y + 5)  # move right
         elif key[pygame.K_LEFT]:  # left key
-            screen.blit(sprite.rect.x-5, sprite.rect.y + 5) # move left
+            self.screen.blit(sprite.rect.x-5, sprite.rect.y + 5) # move left
 
 
 g = Game()
