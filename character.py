@@ -20,17 +20,32 @@ class Character(pygame.sprite.Sprite):
         self.image = pygame.Surface([width, height])
         self.image.fill(WHITE)
         self.image.set_colorkey(WHITE)
-        self.x = 0
-        self.y = 0
-
         # Draw the character itself
-        self.image = pygame.image.load("sprites/" + character_type + ".png").convert_alpha()
         self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.image = pygame.image.load("sprites/" + character_type + ".png").convert_alpha()
 
     def move(self, x, y):
-        self.rect.center[0] += x
-        self.rect.center[1] += y
-        print(self.rect.center[0])
-        print(self.rect.center[1])
+        if self.rect.x == 1215:
+            self.rect.x = 5
+            pass
+        elif self.rect.x == 10:
+            self.rect.x == 1215
+            pass
+        else:
+            self.rect.x += x
+            pass
+        if self.rect.y == 651:
+            self.rect.y = 5
+            pass
+        elif self.rect.y == 5:
+            self.rect.y = 640
+            pass
+        else:
+            self.rect.y += y
+            pass
+
+
 
 
