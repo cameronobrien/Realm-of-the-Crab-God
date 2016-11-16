@@ -20,6 +20,8 @@ class Character(pygame.sprite.Sprite):
         self.image = pygame.Surface([width, height])
         self.image.fill(WHITE)
         self.image.set_colorkey(WHITE)
+        self.x = 0
+        self.y = 0
 
         # Draw the character itself
         self.image = pygame.image.load("sprites/" + character_type + ".png").convert_alpha()
