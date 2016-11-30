@@ -8,7 +8,9 @@ health conditionals, and more
 """
 import pygame
 import random
-WHITE = (255, 255, 255)  # Constant
+
+# Constants
+WHITE = (255, 255, 255)
 WIDTH = 1280
 HEIGHT = 720
 
@@ -19,15 +21,15 @@ class Enemy(pygame.sprite.Sprite):
     def __init__(self, enemy_type):
         super().__init__()  # Call sprite constructor
         # Pass in the type of enemy, x/y pos, and width/height (64x64)
-        self.image = pygame.Surface([64, 64])
+        self.image = pygame.Surface([66, 66])
         self.image.fill(WHITE)
         self.image.set_colorkey(WHITE)
         self.rect = self.image.get_rect()
         self.rect.x = random.randrange(10, 1150)  # random start
-        self.rect.y = random.randrange(10, 680)   # random start
-        self.speed = random.randrange(2, 4)  # random speed
+        self.rect.y = random.randrange(10, 590)   # random start
+        self.speed = 2
         self.move = [None, None]  # x-y coords to move to
-        self.image = pygame.image.load("sprites/" + enemy_type + ".png").convert_alpha()
+        self.image = pygame.image.load("sprites/enemies/" + enemy_type + ".png").convert_alpha()
         self.direction = None  # direction to move the sprite
 
     def roam(self):
@@ -36,24 +38,24 @@ class Enemy(pygame.sprite.Sprite):
                       "N": ((-1, 2), (-self.speed, -1)), "NE": ((1, self.speed), (-self.speed, -1)),
                       "E": ((1, self.speed), (-1, 2)),
                       "SE": ((1, self.speed), (1, self.speed))}  # ((min x, max x)(min y, max y))
-        directionsname = ("S", "SW", "W", "NW", "N", "NE", "E", "SE")  # possible directions
-        if random.randrange(0, 10) == 2:
-            if self.direction is not None:
-                self.direction = random.choice(directionsname)
+        directionsName = ("S", "SW", "W", "NW", "N", "NE", "E", "SE")  # possible directions
+        if random.randrange(0, 15) == 2:  # move about once every 15 frames
+            if self.direction == None:  # if no direction is set, set a random one
+                self.direction = random.choice(directionsName)
             else:
-                a = directionsname.index(self.direction)  # get the index of direction in directions list
-                b = random.randrange(a - 1, a + 2)
-                # set the direction to be the same, or one next to the current direction
-                if b > len(directionsname) - 1:  # if direction index is outside the list, move back to the start
+                a = directionsName.index(self.direction)  # get the index of direction in directions list
+                b = random.randrange(a - 1,
+                                     a + 2)  # set the direction to be the same, or one next to the current direction
+                if b > len(directionsName) - 1:  # if direction index is outside the list, move back to the start
                     b = 0
-                self.direction = directionsname[b]
+                self.direction = directionsName[b]
 
-            smalloffset = random.random()+0.2  # Random floating-point number between 0 and 1.2 ("Tiny number")
+            smalloffset = random.random()+0.05  # Random floating-point number between 0 and 1.2 ("Tiny number")
             self.move[0] = random.randrange(directions[self.direction][0][0],
                                             directions[self.direction][0][1]) + smalloffset
             self.move[1] = random.randrange(directions[self.direction][1][0],
                                             directions[self.direction][1][1]) + smalloffset
-        if self.rect.x < 5 or self.rect.x > WIDTH - 5 or self.rect.y < 5 or self.rect.y > HEIGHT - 5:
+        if self.rect.x < 5 or self.rect.x > WIDTH - 5 or self.rect.y < 5 or self.rect.y > HEIGHT - 15:
             if self.rect.x < 5:
                 self.direction = "E"
             elif self.rect.x > WIDTH - 5:

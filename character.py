@@ -24,7 +24,7 @@ class Character(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-        self.image = pygame.image.load("sprites/" + character_type + ".png").convert_alpha()
+        self.image = pygame.image.load("sprites/playables/" + character_type + ".png").convert_alpha()
 
     def move(self, x, y):
         if self.rect.x >= 1216:

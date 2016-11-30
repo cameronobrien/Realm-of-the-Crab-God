@@ -20,13 +20,13 @@ class Game:
 
     def __init__(self):
         clock = pygame.time.Clock()
-        pygame.display.set_caption(title, "ROTKG")
+        pygame.display.set_caption(title)
         self.all_sprites_list = pygame.sprite.Group()
         screen = pygame.display.set_mode((width, height))
-        sprite = Character("warrior", 15, 15, 64, 64)
+        sprite = Character("warrior", 15, 15, 66, 66)
         enemies = []
         for i in range(1):
-            enemy = Enemy("warrior")
+            enemy = Enemy("evilwizard")
             enemies.append(enemy)
         self.all_sprites_list.add(sprite)
         self.all_sprites_list.add(enemy)
