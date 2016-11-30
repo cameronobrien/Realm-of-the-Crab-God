@@ -27,17 +27,17 @@ class Character(pygame.sprite.Sprite):
         self.image = pygame.image.load("sprites/" + character_type + ".png").convert_alpha()
 
     def move(self, x, y):
-        if self.rect.x == 1215:
-            self.rect.x = 5
+        if self.rect.x >= 1216:
+            self.rect.x = 10
             pass
-        elif self.rect.x == 10:
-            self.rect.x == 1215
+        elif self.rect.x <= 5:
+            self.rect.x = 1215
             pass
         else:
             self.rect.x += x
             pass
-        if self.rect.y == 651:
-            self.rect.y = 5
+        if self.rect.y == 650:
+            self.rect.y = 10
             pass
         elif self.rect.y == 5:
             self.rect.y = 640
