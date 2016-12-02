@@ -9,10 +9,17 @@ Handles the core game loop
 import pygame
 from character import Character
 from enemy import Enemy
+from role import Role
+from constants import TITLE
 width, height = 1280, 720
 background_color = (255, 255, 255)
 bg = pygame.image.load("background_image.png")
-title = "Realm of the Crab God"
+
+warrior = Role(10, 100, "Warrior")
+rogue = Role(75, 15, "Rogue")
+mage = Role(90, 15, "Mage")
+paladin = Role(200, 5, "Paladin")
+
 
 
 class Game:
@@ -21,11 +28,7 @@ class Game:
         clock = pygame.time.Clock()
         self.all_sprites_list = pygame.sprite.Group()
         screen = pygame.display.set_mode((width, height))
-        sprite = Character("warrior", 15, 15, 66, 66, 0, 0)
-        sprite.set_stats()
-        print(title)
-        # print(sprite.health)
-        # print(sprite.attack_damage)
+        sprite = Character(warrior, (500,500), (64,64))
         enemies = []
         for i in range(5):
             enemy = Enemy("evilwizard")
@@ -39,11 +42,11 @@ class Game:
         # pygame.mixer.music.load(file)
         # pygame.mixer.music.play()
         while running:
-            pygame.display.set_caption(title)
+            pygame.display.set_caption(TITLE)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:  # Quit conditional
                     running = False
-                if event.type == pygame.KEYDOWN:
+                if event.type == pygame.KEYDOWN and not pygame.sprite.collide_rect(enemy, sprite):
                     if event.key == pygame.K_LEFT:
                         sprite.move(-5, 0)
                     elif event.key == pygame.K_RIGHT:
@@ -59,6 +62,5 @@ class Game:
             self.all_sprites_list.draw(screen)  # Redraw sprite
             pygame.display.flip()  # Refresh screen
             clock.tick(60)  # Number of frames per second
-
 
 g = Game()

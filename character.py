@@ -1,68 +1,49 @@
-"""
-character
-
-Handles the creation and drawing of new characters to the scene.
-
-:author: Cameron O'Brien
-"""
 import pygame
-WHITE = (255, 255, 255)  # Constant
+
+from constants import WINDOW_HEIGHT, WINDOW_WIDTH, WHITE, FILE_PATH_CHAR
 
 
 class Character(pygame.sprite.Sprite):
-    # This class represents one of the five characters, a warrior, rogue, archer, wizard, or paladin
-
-    def __init__(self, character_type, x, y, width, height, health, attack_damage):
+    def __init__(self, role, position, dimensions):
+        """
+        :param role: role instance giving character attributes
+        :param position: (x, y) position on screen
+        :param dimensions: dimensions of the sprite for creating image
+        """
         super().__init__()
         # Call the sprite constructor
         # Pass in the type of the character, and its x and y position, width and height.
         # Set the background color and set it to be transparent.
-        self.image = pygame.Surface([width, height])
+        self.image = pygame.Surface(dimensions)
         self.image.fill(WHITE)
         self.image.set_colorkey(WHITE)
+        self.image = pygame.image.load(FILE_PATH_CHAR + role.title + ".png").convert_alpha()
+
         # Draw the character itself
+        # position is the tuple (x, y)
         self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-        self.image = pygame.image.load("sprites/playables/" + character_type + ".png").convert_alpha()
-        self.health = 100
-        self.attack_damage = 0
-        self.character_type = character_type
+        self.rect.x, self.rect.y = position
+
+        self.attack = role.attack
+        self.health = role.health
+        self.title = role.title
 
     def move(self, x, y):
-        if self.rect.x >= 1216:
+        if self.rect.x >= WINDOW_WIDTH - 65:
             self.rect.x = 10
             pass
-        elif self.rect.x <= 5:
+        elif self.rect.x <= WINDOW_WIDTH - 1275:
             self.rect.x = 1215
             pass
         else:
             self.rect.x += x
             pass
-        if self.rect.y == 650:
+        if self.rect.y == WINDOW_HEIGHT - 70:
             self.rect.y = 10
             pass
-        elif self.rect.y == 5:
+        elif self.rect.y == WINDOW_HEIGHT - 715:
             self.rect.y = 640
             pass
         else:
             self.rect.y += y
             pass
-
-    def set_stats(self):
-        if self.character_type == "warrior":
-            self.attack_damage = 10
-            self.health = 100
-        elif self.character_type == "rogue":
-            self.attack_damage = 15
-            self.health = 75
-        elif self.character_type == "mage":
-            self.attack_damage = 15
-            self.health = 90
-        elif self.character_type == "paladin":
-            self.attack_damage = 5
-            self.health = 200
-
-
-
-

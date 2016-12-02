@@ -8,11 +8,9 @@ health conditionals, and more
 """
 import pygame
 import random
-
+from constants import WINDOW_HEIGHT, WINDOW_WIDTH, FILE_PATH_ENEMY, WHITE
 # Constants
-WHITE = (255, 255, 255)
-WIDTH = 1280
-HEIGHT = 720
+
 
 
 class Enemy(pygame.sprite.Sprite):
@@ -29,7 +27,7 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.y = random.randrange(10, 590)   # random start
         self.speed = 2
         self.move = [None, None]  # x-y coords to move to
-        self.image = pygame.image.load("sprites/enemies/" + enemy_type + ".png").convert_alpha()
+        self.image = pygame.image.load(FILE_PATH_ENEMY + enemy_type + ".png").convert_alpha()
         self.direction = None  # direction to move the sprite
 
     def roam(self):
@@ -55,14 +53,14 @@ class Enemy(pygame.sprite.Sprite):
                                             directions[self.direction][0][1]) + smalloffset
             self.move[1] = random.randrange(directions[self.direction][1][0],
                                             directions[self.direction][1][1]) + smalloffset
-        if self.rect.x < 5 or self.rect.x > WIDTH - 5 or self.rect.y < 5 or self.rect.y > HEIGHT - 32:
+        if self.rect.x < 5 or self.rect.x > WINDOW_WIDTH - 5 or self.rect.y < 5 or self.rect.y > WINDOW_HEIGHT - 32:
             if self.rect.x < 5:
                 self.direction = "E"
-            elif self.rect.x > WIDTH - 5:
+            elif self.rect.x > WINDOW_WIDTH - 5:
                 self.direction = "W"
             elif self.rect.y < 5:
                 self.direction = "S"
-            elif self.rect.y > HEIGHT - 32:
+            elif self.rect.y > WINDOW_HEIGHT - 32:
                 self.direction = "N"
             self.move[0] = random.randrange(directions[self.direction][0][0], directions[self.direction][0][1])
             self.move[1] = random.randrange(directions[self.direction][1][0], directions[self.direction][1][1])
