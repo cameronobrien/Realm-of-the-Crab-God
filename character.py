@@ -12,7 +12,7 @@ WHITE = (255, 255, 255)  # Constant
 class Character(pygame.sprite.Sprite):
     # This class represents one of the five characters, a warrior, rogue, archer, wizard, or paladin
 
-    def __init__(self, character_type, x, y, width, height):
+    def __init__(self, character_type, x, y, width, height, health, attack_damage):
         super().__init__()
         # Call the sprite constructor
         # Pass in the type of the character, and its x and y position, width and height.
@@ -25,6 +25,8 @@ class Character(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
         self.image = pygame.image.load("sprites/playables/" + character_type + ".png").convert_alpha()
+        self.health = 100
+        self.attack_damage = 0
 
     def move(self, x, y):
         if self.rect.x >= 1216:
@@ -45,6 +47,20 @@ class Character(pygame.sprite.Sprite):
         else:
             self.rect.y += y
             pass
+
+    def set_stats(self):
+        if self.character_type == "warrior":
+            self.attack_damage = 10
+            self.health = 100
+        elif self.character_type == "rogue":
+            self.attack_damage = 15
+            self.health = 75
+        elif self.character_type == "mage":
+            self.attack_damage = 15
+            self.health = 90
+        elif self.character_type == "paladin":
+            self.attack_damage = 5
+            self.health = 200
 
 
 

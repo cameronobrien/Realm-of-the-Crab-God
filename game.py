@@ -23,7 +23,10 @@ class Game:
         pygame.display.set_caption(title)
         self.all_sprites_list = pygame.sprite.Group()
         screen = pygame.display.set_mode((width, height))
-        sprite = Character("warrior", 15, 15, 66, 66)
+        sprite = Character("warrior", 15, 15, 66, 66, 0, 0)
+        sprite.set_stats()
+        print(sprite.health)
+        print(sprite.attack_damage)
         enemies = []
         for i in range(1):
             enemy = Enemy("evilwizard")
