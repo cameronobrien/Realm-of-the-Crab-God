@@ -55,14 +55,14 @@ class Enemy(pygame.sprite.Sprite):
                                             directions[self.direction][0][1]) + smalloffset
             self.move[1] = random.randrange(directions[self.direction][1][0],
                                             directions[self.direction][1][1]) + smalloffset
-        if self.rect.x < 5 or self.rect.x > WIDTH - 5 or self.rect.y < 5 or self.rect.y > HEIGHT - 15:
+        if self.rect.x < 5 or self.rect.x > WIDTH - 5 or self.rect.y < 5 or self.rect.y > HEIGHT - 32:
             if self.rect.x < 5:
                 self.direction = "E"
             elif self.rect.x > WIDTH - 5:
                 self.direction = "W"
             elif self.rect.y < 5:
                 self.direction = "S"
-            elif self.rect.y > HEIGHT - 10:
+            elif self.rect.y > HEIGHT - 32:
                 self.direction = "N"
             self.move[0] = random.randrange(directions[self.direction][0][0], directions[self.direction][0][1])
             self.move[1] = random.randrange(directions[self.direction][1][0], directions[self.direction][1][1])

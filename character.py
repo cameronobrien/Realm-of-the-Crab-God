@@ -27,6 +27,7 @@ class Character(pygame.sprite.Sprite):
         self.image = pygame.image.load("sprites/playables/" + character_type + ".png").convert_alpha()
         self.health = 100
         self.attack_damage = 0
+        self.character_type = character_type
 
     def move(self, x, y):
         if self.rect.x >= 1216:
