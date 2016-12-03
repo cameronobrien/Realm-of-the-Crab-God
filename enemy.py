@@ -26,7 +26,7 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.x = random.randrange(10, 1150)  # random start
         self.rect.y = random.randrange(10, 590)   # random start
         self.speed = 2
-        self.move = [None, None]  # x-y coords to move to
+        self.move = [None, None]  # x-y coordinates to move to
         self.image = pygame.image.load(FILE_PATH_ENEMY + enemy_type + ".png").convert_alpha()
         self.direction = None  # direction to move the sprite
 
@@ -48,11 +48,11 @@ class Enemy(pygame.sprite.Sprite):
                     b = 0
                 self.direction = directionsName[b]
 
-            smalloffset = random.random()+0.05  # Random floating-point number between 0 and 1.2 ("Tiny number")
+            small_offset = random.random()+0.05  # Random floating-point number between 0 and 1.05 ("Tiny number")
             self.move[0] = random.randrange(directions[self.direction][0][0],
-                                            directions[self.direction][0][1]) + smalloffset
+                                            directions[self.direction][0][1]) + small_offset
             self.move[1] = random.randrange(directions[self.direction][1][0],
-                                            directions[self.direction][1][1]) + smalloffset
+                                            directions[self.direction][1][1]) + small_offset
         if self.rect.x < 5 or self.rect.x > WINDOW_WIDTH - 5 or self.rect.y < 5 or self.rect.y > WINDOW_HEIGHT - 32:
             if self.rect.x < 5:
                 self.direction = "E"

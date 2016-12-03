@@ -10,16 +10,15 @@ import pygame
 from character import Character
 from enemy import Enemy
 from role import Role
-from constants import TITLE
-width, height = 1280, 720
-background_color = (255, 255, 255)
+from constants import TITLE, WINDOW_HEIGHT, WINDOW_WIDTH, WHITE
+
 bg = pygame.image.load("background_image.png")
 
+# Roles
 warrior = Role(10, 100, "Warrior")
 rogue = Role(75, 15, "Rogue")
 mage = Role(90, 15, "Mage")
 paladin = Role(200, 5, "Paladin")
-
 
 
 class Game:
@@ -27,7 +26,7 @@ class Game:
     def __init__(self):
         clock = pygame.time.Clock()
         self.all_sprites_list = pygame.sprite.Group()
-        screen = pygame.display.set_mode((width, height))
+        screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         sprite = Character(warrior, (500,500), (64,64))
         enemies = []
         for i in range(5):

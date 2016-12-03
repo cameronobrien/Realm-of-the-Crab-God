@@ -31,19 +31,13 @@ class Character(pygame.sprite.Sprite):
     def move(self, x, y):
         if self.rect.x >= WINDOW_WIDTH - 65:
             self.rect.x = 10
-            pass
         elif self.rect.x <= WINDOW_WIDTH - 1275:
             self.rect.x = 1215
-            pass
         else:
             self.rect.x += x
-            pass
         if self.rect.y == WINDOW_HEIGHT - 70:
             self.rect.y = 10
-            pass
         elif self.rect.y == WINDOW_HEIGHT - 715:
             self.rect.y = 640
-            pass
         else:
             self.rect.y += y
-            pass
